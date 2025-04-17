@@ -16,6 +16,17 @@ exports.userController = {
                 throw error;
             if (!data)
                 return reply.status(404).send({ error: 'User not found' });
+            // Enviar notificação para o Discord
+            await (0, discordService_1.sendDiscordNotification)({
+                title: '👤 Perfil do Usuário Acessado',
+                description: `O usuário com ID ${userId} acessou seu perfil.`,
+                color: 0x1e90ff, // Azul
+                fields: [
+                    { name: 'Usuário ID', value: userId, inline: true },
+                    { name: 'Email', value: data.email, inline: true },
+                    { name: 'Nome', value: data.name || 'N/A', inline: true },
+                ],
+            });
             reply.send(data);
         }
         catch (error) {
@@ -36,7 +47,17 @@ exports.userController = {
             if (!data)
                 return reply.status(404).send({ error: 'User not found' });
             // Enviar notificação para o Discord
-            await (0, discordService_1.sendDiscordNotification)(`👤 Perfil do usuário atualizado: ${data[0].name} (${data[0].email})`);
+            await (0, discordService_1.sendDiscordNotification)({
+                title: '👤 Perfil do Usuário Atualizado',
+                description: `O usuário com ID ${userId} atualizou seu perfil.`,
+                color: 0xffa500, // Laranja
+                fields: [
+                    { name: 'Usuário ID', value: userId, inline: true },
+                    { name: 'Email', value: data[0].email, inline: true },
+                    { name: 'Novo Nome', value: name || 'N/A', inline: true },
+                    { name: 'Novo Endereço', value: address || 'N/A', inline: false },
+                ],
+            });
             reply.send(data[0]);
         }
         catch (error) {

@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// src/server.ts
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '../.env') });
@@ -13,6 +14,7 @@ const productRoutes_1 = require("./routes/productRoutes");
 const cartRoutes_1 = require("./routes/cartRoutes");
 const orderRoutes_1 = require("./routes/orderRoutes");
 const userRoutes_1 = require("./routes/userRoutes");
+const authRoutes_1 = require("./routes/authRoutes"); // Novo
 const metricsRoutes_1 = require("./routes/metricsRoutes");
 const auth_1 = require("./middleware/auth");
 const admin_1 = require("./middleware/admin");
@@ -27,6 +29,7 @@ fastify.register(productRoutes_1.productRoutes);
 fastify.register(cartRoutes_1.cartRoutes);
 fastify.register(orderRoutes_1.orderRoutes);
 fastify.register(userRoutes_1.userRoutes);
+fastify.register(authRoutes_1.authRoutes); // Novo
 fastify.register(metricsRoutes_1.metricsRoutes);
 const start = async () => {
     try {

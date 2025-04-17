@@ -6,8 +6,12 @@ export async function trackAccess(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  const userId = request.user?.id || null;
-  const page = request.url;
+  try {
+    const userId = request.user?.id || null;
+    const page = request.url;
 
-  await supabase.from('access_logs').insert([{ user_id: userId, page }]);
+    await supabase.from('access_logs').insert([{ user_id: userId, page }]);
+  } catch (error) {
+    console.error('Erro ao registrar acesso:', error);
+  }
 }

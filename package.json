@@ -4,7 +4,7 @@
   "scripts": {
     "start": "node dist/server.js",
     "start:env": "cross-env NODE_ENV=production node dist/server.js",
-    "dev": "cross-env JWT_SECRET=59761ee07851753d805a0db4a1b9c3d14e49f5b805f4d25b4b3a4b1951423913 SUPABASE_URL=https://zkbsjbyucdixnvtgkggn.supabase.co SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprYnNqYnl1Y2RpeG52dGdrZ2duIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ4NjAyMzcsImV4cCI6MjA2MDQzNjIzN30._--VkB8jr7RjMpPbIXiGoHJ0B2kctrRgJPO44t2bfLo NODE_OPTIONS=--no-deprecation ts-node-dev --respawn --transpile-only src/server.ts",
+    "dev": "cross-env ZOHO_EMAIL=atendimento@gpstech.com.br ZOHO_PASSWORD=goNfyx-kidbim-temfo3 JWT_SECRET=59761ee07851753d805a0db4a1b9c3d14e49f5b805f4d25b4b3a4b1951423913 DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/1362289292709335221/PwNt_8Wn7ruxsMRfTsVdER4laXO-1Ng3nu-nlHFNqBwgy7DUSPOYe0LvRO6SmxYaojSV SUPABASE_URL=https://zkbsjbyucdixnvtgkggn.supabase.co SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprYnNqYnl1Y2RpeG52dGdrZ2duIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ4NjAyMzcsImV4cCI6MjA2MDQzNjIzN30._--VkB8jr7RjMpPbIXiGoHJ0B2kctrRgJPO44t2bfLo NODE_OPTIONS=--no-deprecation ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
     "test": "jest"
   },
@@ -14,15 +14,18 @@
     "@fastify/rate-limit": "^10.0.0",
     "@supabase/supabase-js": "^2.0.0",
     "axios": "^1.8.4",
+    "bcrypt": "^5.1.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.5.0",
     "fastify": "^5.3.0",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.0.0",
     "redis": "^4.0.0",
+    "uuid": "^11.1.0",
     "zod": "^3.0.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/jest": "^29.0.0",
     "@types/node": "^20.17.30",
     "@types/nodemailer": "^6.4.17",

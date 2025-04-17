@@ -1,3 +1,4 @@
+// src/server.ts
 import dotenv from 'dotenv';
 import path from 'path';
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
@@ -8,6 +9,7 @@ import { productRoutes } from './routes/productRoutes';
 import { cartRoutes } from './routes/cartRoutes';
 import { orderRoutes } from './routes/orderRoutes';
 import { userRoutes } from './routes/userRoutes';
+import { authRoutes } from './routes/authRoutes'; // Novo
 import { metricsRoutes } from './routes/metricsRoutes';
 import { authenticate } from './middleware/auth';
 import { isAdmin } from './middleware/admin';
@@ -27,6 +29,7 @@ fastify.register(productRoutes);
 fastify.register(cartRoutes);
 fastify.register(orderRoutes);
 fastify.register(userRoutes);
+fastify.register(authRoutes); // Novo
 fastify.register(metricsRoutes);
 
 const start = async () => {

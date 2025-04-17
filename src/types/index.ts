@@ -14,6 +14,10 @@ export interface CartItem {
   user_id: string;
   product_id: string;
   quantity: number;
+  product?: {
+    name: string;
+    price?: number;
+  };
 }
 
 export interface Order {
@@ -32,6 +36,7 @@ export interface User {
   name?: string;
   address?: string;
   role: 'user' | 'admin';
+  password?: string; // Adicionado como opcional, já que nem todas as rotas precisam disso
 }
 
 export interface AuthenticatedUser {
