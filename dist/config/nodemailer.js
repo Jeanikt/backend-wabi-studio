@@ -4,8 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendEmail = void 0;
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config(); // Carregar as variáveis do .env explicitamente
 const nodemailer_1 = __importDefault(require("nodemailer"));
-require("dotenv/config");
+console.log('SMTP user:', process.env.ZOHO_EMAIL);
+console.log('SMTP pass:', process.env.ZOHO_PASSWORD);
 const transporter = nodemailer_1.default.createTransport({
     host: 'smtp.zoho.com',
     port: 465,

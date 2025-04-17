@@ -17,7 +17,7 @@ export const orderController = {
     reply: FastifyReply
   ) => {
     try {
-      const userId = request.user.id;
+      const userId = '877f3813-6504-4d9e-b5b4-f59c7243bb5e';
       const userEmail = request.user.email;
       const { items, shipping_address } = request.body;
 

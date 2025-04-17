@@ -1,6 +1,7 @@
 // src/controllers/userController.ts
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { supabase } from '../config/supabase';
+import { sendDiscordNotification } from '../services/discordService';
 
 export const userController = {
   getUserProfile: async (request: FastifyRequest, reply: FastifyReply) => {
@@ -33,6 +34,10 @@ export const userController = {
         .select();
       if (error) throw error;
       if (!data) return reply.status(404).send({ error: 'User not found' });
+      // Enviar notificação para o Discord
+      await sendDiscordNotification(
+        `👤 Perfil do usuário atualizado: ${data[0].name} (${data[0].email})`
+      );
       reply.send(data[0]);
     } catch (error: any) {
       reply.status(500).send({ error: 'Internal Server Error' });

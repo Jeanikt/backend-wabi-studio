@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userController = void 0;
 const supabase_1 = require("../config/supabase");
+const discordService_1 = require("../services/discordService");
 exports.userController = {
     getUserProfile: async (request, reply) => {
         try {
@@ -34,6 +35,8 @@ exports.userController = {
                 throw error;
             if (!data)
                 return reply.status(404).send({ error: 'User not found' });
+            // Enviar notificação para o Discord
+            await (0, discordService_1.sendDiscordNotification)(`👤 Perfil do usuário atualizado: ${data[0].name} (${data[0].email})`);
             reply.send(data[0]);
         }
         catch (error) {

@@ -1,6 +1,7 @@
 // src/controllers/cartController.ts
 import { FastifyRequest, FastifyReply } from 'fastify';
 import { supabase } from '../config/supabase';
+import { sendDiscordNotification } from '../services/discordService';
 
 export const cartController = {
   getCart: async (request: FastifyRequest, reply: FastifyReply) => {
@@ -11,6 +12,12 @@ export const cartController = {
         .select('*, product:products(*)')
         .eq('user_id', userId);
       if (error) throw error;
+
+      // Enviar notificação para o Discord
+      await sendDiscordNotification(
+        `🛒 O usuário com ID ${userId} acessou o carrinho de compras.`
+      );
+
       reply.send(data);
     } catch (error: any) {
       reply.status(500).send({ error: 'Internal Server Error' });
@@ -24,7 +31,7 @@ export const cartController = {
     reply: FastifyReply
   ) => {
     try {
-      const userId = request.user.id;
+      const userId = "877f3813-6504-4d9e-b5b4-f59c7243bb5e";
       const { product_id, quantity } = request.body;
 
       const { data: product, error: productError } = await supabase
@@ -43,6 +50,11 @@ export const cartController = {
         )
         .select();
       if (error) throw error;
+
+      // Enviar notificação para o Discord
+      await sendDiscordNotification(
+        `🛒 O usuário com ID ${userId} adicionou o produto com ID ${product_id} e quantidade ${quantity} ao carrinho.`
+      );
 
       reply.status(201).send(data[0]);
     } catch (error: any) {
@@ -64,7 +76,10 @@ export const cartController = {
         .eq('id', itemId)
         .eq('user_id', userId);
       if (error) throw error;
-
+      // Enviar notificação para o Discord
+      await sendDiscordNotification(
+        `🛒 O usuário com ID ${userId} removeu o item com ID ${itemId} do carrinho.`
+      );
       reply.status(204).send();
     } catch (error: any) {
       reply.status(500).send({ error: 'Internal Server Error' });
