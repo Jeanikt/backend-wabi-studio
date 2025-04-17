@@ -1,8 +1,8 @@
-import nodemailer from "nodemailer";
-import "dotenv/config";
+import nodemailer, { Transporter } from 'nodemailer';
+import 'dotenv/config';
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.zoho.com",
+const transporter: Transporter = nodemailer.createTransport({
+  host: 'smtp.zoho.com',
   port: 465,
   secure: true,
   auth: {

@@ -1,4 +1,5 @@
-import { FastifyRequest, FastifyReply } from "fastify";
+// src/middleware/auth.ts
+import { FastifyRequest, FastifyReply } from 'fastify';
 
 export async function authenticate(
   request: FastifyRequest,
@@ -7,6 +8,7 @@ export async function authenticate(
   try {
     await request.jwtVerify();
   } catch (err) {
-    reply.status(401).send({ error: "Unauthorized" });
+    reply.status(401).send({ error: 'Unauthorized' });
+    return;
   }
 }

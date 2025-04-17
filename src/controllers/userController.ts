@@ -1,21 +1,21 @@
-import { FastifyRequest, FastifyReply } from "fastify";
-import { supabase } from "../config/supabase";
-import { User } from "../types";
+// src/controllers/userController.ts
+import { FastifyRequest, FastifyReply } from 'fastify';
+import { supabase } from '../config/supabase';
 
 export const userController = {
   getUserProfile: async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const userId = request.user.id;
       const { data, error } = await supabase
-        .from("users")
-        .select("*")
-        .eq("id", userId)
+        .from('users')
+        .select('*')
+        .eq('id', userId)
         .single();
       if (error) throw error;
-      if (!data) return reply.status(404).send({ error: "User not found" });
+      if (!data) return reply.status(404).send({ error: 'User not found' });
       reply.send(data);
-    } catch (error) {
-      reply.status(500).send({ error: "Internal Server Error" });
+    } catch (error: any) {
+      reply.status(500).send({ error: 'Internal Server Error' });
     }
   },
 
@@ -27,15 +27,15 @@ export const userController = {
       const userId = request.user.id;
       const { name, address } = request.body;
       const { data, error } = await supabase
-        .from("users")
+        .from('users')
         .update({ name, address })
-        .eq("id", userId)
+        .eq('id', userId)
         .select();
       if (error) throw error;
-      if (!data) return reply.status(404).send({ error: "User not found" });
+      if (!data) return reply.status(404).send({ error: 'User not found' });
       reply.send(data[0]);
-    } catch (error) {
-      reply.status(500).send({ error: "Internal Server Error" });
+    } catch (error: any) {
+      reply.status(500).send({ error: 'Internal Server Error' });
     }
   },
 };
